@@ -1,43 +1,75 @@
-# BlueBuild Template &nbsp; [![bluebuild build badge](https://github.com/blue-build/template/actions/workflows/build.yml/badge.svg)](https://github.com/blue-build/template/actions/workflows/build.yml)
+# BoringOS
 
-See the [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository based on this template.
+[![Build Status](https://github.com/getboring/boringos/actions/workflows/build.yml/badge.svg)](https://github.com/getboring/boringos/actions/workflows/build.yml)
 
-After setup, it is recommended you update this README to describe your custom image.
+**Your computer. Minus the nonsense.**
+
+BoringOS is an auto-updating Fedora Atomic image. Same computer. Same files. Same apps. No ads. No tracking. No forced updates.
+
+**Website:** [boringos-site.vercel.app](https://boringos-site.vercel.app)
+
+---
 
 ## Installation
 
-> [!WARNING]  
-> [This is an experimental feature](https://www.fedoraproject.org/wiki/Changes/OstreeNativeContainerStable), try at your own discretion.
+> [!NOTE]
+> BoringOS replaces your current operating system. Back up your files first.
 
-To rebase an existing atomic Fedora installation to the latest build:
+### From an existing Fedora Atomic installation
 
-- First rebase to the unsigned image, to get the proper signing keys and policies installed:
-  ```
-  rpm-ostree rebase ostree-unverified-registry:ghcr.io/blue-build/template:latest
-  ```
-- Reboot to complete the rebase:
-  ```
-  systemctl reboot
-  ```
-- Then rebase to the signed image, like so:
-  ```
-  rpm-ostree rebase ostree-image-signed:docker://ghcr.io/blue-build/template:latest
-  ```
-- Reboot again to complete the installation
-  ```
-  systemctl reboot
-  ```
+1. Rebase to the unsigned image:
+   ```
+   rpm-ostree rebase ostree-unverified-registry:ghcr.io/getboring/boringos:latest
+   ```
 
-The `latest` tag will automatically point to the latest build. That build will still always use the Fedora version specified in `recipe.yml`, so you won't get accidentally updated to the next major version.
+2. Reboot:
+   ```
+   systemctl reboot
+   ```
 
-## ISO
+3. Rebase to the signed image:
+   ```
+   rpm-ostree rebase ostree-image-signed:docker://ghcr.io/getboring/boringos:latest
+   ```
 
-If build on Fedora Atomic, you can generate an offline ISO with the instructions available [here](https://blue-build.org/learn/universal-blue/#fresh-install-from-an-iso). These ISOs cannot unfortunately be distributed on GitHub for free due to large sizes, so for public projects something else has to be used for hosting.
+4. Reboot again:
+   ```
+   systemctl reboot
+   ```
+
+Done. Your computer now runs BoringOS.
+
+---
+
+## What's Included
+
+- Firefox (web browser)
+- Thunderbird (email)
+- LibreOffice (documents, spreadsheets, presentations)
+- Photos, Videos, Music players
+- Games (Chess, Solitaire, Sudoku)
+- Educational apps for kids (GCompris)
+
+Everything you need. Nothing you don't.
+
+---
 
 ## Verification
 
-These images are signed with [Sigstore](https://www.sigstore.dev/)'s [cosign](https://github.com/sigstore/cosign). You can verify the signature by downloading the `cosign.pub` file from this repo and running the following command:
+Images are signed with [Sigstore](https://www.sigstore.dev/) cosign. Verify with:
 
 ```bash
-cosign verify --key cosign.pub ghcr.io/blue-build/template
+cosign verify --key cosign.pub ghcr.io/getboring/boringos
 ```
+
+---
+
+## Built With
+
+- [Fedora Silverblue](https://fedoraproject.org/silverblue/)
+- [Universal Blue](https://universal-blue.org)
+- [BlueBuild](https://blue-build.org)
+
+---
+
+**Free forever.**
